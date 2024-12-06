@@ -4,9 +4,14 @@ import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
+import { useEffect } from "react";
 
 const App = () => {
-  const { isLoggedIn } = useAuthStore();
+  const { isLoggedIn, initializeAuth } = useAuthStore();
+
+  useEffect(() => {
+    initializeAuth();
+  }, []);
 
   return (
     <Routes>
