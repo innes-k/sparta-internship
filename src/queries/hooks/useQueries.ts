@@ -1,13 +1,13 @@
 import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEY_SINGLE_POST } from "../queryKeys/queryKeys";
-import { testGetSinglePost } from "../../apis/test";
+import { QUERY_KEY_POSTS } from "../queryKeys/queryKeys";
+import { testGetPosts } from "../../apis/test";
 
-export const useGetSinglePost = () => {
+export const useGetPosts = () => {
   const {
-    data: singlePost,
+    data: posts,
     isLoading: isSinglePostLoading,
     isError: isSinglePostError,
-  } = useQuery({ queryKey: [QUERY_KEY_SINGLE_POST], queryFn: testGetSinglePost });
+  } = useQuery({ queryKey: [QUERY_KEY_POSTS], queryFn: testGetPosts });
 
-  return { singlePost, isSinglePostLoading, isSinglePostError };
+  return { posts, isSinglePostLoading, isSinglePostError };
 };

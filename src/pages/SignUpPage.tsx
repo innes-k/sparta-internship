@@ -26,8 +26,9 @@ const SignupPage: React.FC = () => {
       alert("비밀번호가 일치하지 않습니다!");
       return;
     }
+
     alert("회원가입이 완료되었습니다!");
-    console.log("Submitted Data:", formData);
+    // console.log("Submitted Data:", formData);
     formData && navigate("/");
   };
 

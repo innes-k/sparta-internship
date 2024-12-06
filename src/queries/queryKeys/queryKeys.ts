@@ -1,1 +1,1 @@
-export const QUERY_KEY_SINGLE_POST = "singlePost";
+export const QUERY_KEY_POSTS = "posts_list";
