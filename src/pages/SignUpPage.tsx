@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSignUpMutation } from "../queries/hooks/useMutations";
 
 const SignupPage: React.FC = () => {
-  const navigate = useNavigate();
+  const { signUpMutation } = useSignUpMutation();
 
   const [formData, setFormData] = useState({
     userId: "",
@@ -27,9 +27,15 @@ const SignupPage: React.FC = () => {
       return;
     }
 
-    alert("회원가입이 완료되었습니다!");
+    const userPayload = {
+      id: formData.userId,
+      password: formData.password,
+      nickname: formData.nickname,
+    };
+
+    signUpMutation(userPayload);
+
     // console.log("Submitted Data:", formData);
-    formData && navigate("/");
   };
 
   return (
