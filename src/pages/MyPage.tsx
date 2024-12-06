@@ -1,11 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useGetUserInfo } from "../queries/hooks/useQueries/useQueries";
 
 const MyPage: React.FC = () => {
-  const [profileImage, setProfileImage] = useState<string>("https://via.placeholder.com/150");
-  const [nickname, setNickname] = useState<string>("닉네임"); // 임시 닉네임
-  const [originalNickname, setOriginalNickname] = useState<string>("닉네임"); // 원본 닉네임 저장
+  const [profileImage, setProfileImage] = useState<string>("");
+  const [nickname, setNickname] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false); // 수정 상태 여부
-  const userId = "user1234"; // 임시 아이디
+
+  const { userInfo, isUserInfoLoading, isUserInfoError } = useGetUserInfo();
+
+  useEffect(() => {
+    if (userInfo) {
+      const defaultAvatar = "https://via.placeholder.com/150";
+      setProfileImage(userInfo.avatar || defaultAvatar);
+      setNickname(userInfo.nickname);
+    }
+  }, [userInfo]);
+
+  if (isUserInfoLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isUserInfoError) {
+    return <div>Error</div>;
+  }
+
+  console.log("userInfo", userInfo);
+
+  const { id: userId, nickname: originalNickname } = userInfo;
 
   // 프로필 이미지 변경 핸들러
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,7 +49,6 @@ const MyPage: React.FC = () => {
         alert("변경된 값이 없습니다.");
         return;
       }
-      setOriginalNickname(nickname); // 변경된 닉네임 저장
       alert("프로필이 저장되었습니다!");
       console.log("Updated Profile:", { profileImage, nickname });
     }
