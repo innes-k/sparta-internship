@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useSignUpMutation } from "../queries/hooks/useMutations";
 
 const SignupPage: React.FC = () => {
+  // 테스트 id, pw : christmasTest
+
   const { signUpMutation } = useSignUpMutation();
 
   const [formData, setFormData] = useState({
