@@ -10,7 +10,7 @@ export const useLoginMutation = () => {
   const { mutate: loginMutation } = useMutation({
     mutationFn: (data: LoginRequest) => login(data),
     onSuccess: (loginData) => {
-      console.log("loginData", loginData);
+      localStorage.setItem("accessToken", loginData.accessToken);
       alert("로그인이 완료되었습니다!");
       navigate("/");
     },
