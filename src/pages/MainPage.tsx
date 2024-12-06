@@ -1,6 +1,20 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.preventDefault();
+
+    const confirmLogout = window.confirm("로그아웃 하시겠습니까?");
+    if (confirmLogout) {
+      localStorage.removeItem("accessToken");
+      alert("로그아웃 되었습니다.");
+
+      navigate("/");
+    }
+  };
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <header className="text-center mb-12">
@@ -16,12 +30,12 @@ const MainPage = () => {
         >
           로그인
         </Link>
-        <Link
-          to="/"
+        <div
           className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
+          onClick={handleLogout}
         >
           로그아웃 (임시)
-        </Link>
+        </div>
         <Link
           to="/signup"
           className="px-6 py-3 text-lg bg-white text-purple-500 rounded-lg shadow-lg hover:bg-purple-100 hover:shadow-xl transition duration-300"
