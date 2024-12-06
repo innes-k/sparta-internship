@@ -1,29 +1,6 @@
 import { Link } from "react-router-dom";
-import { useGetPosts } from "../queries/hooks/useQueries";
-import { useCreateNewPostMutation } from "../queries/hooks/useMutations";
 
 const MainPage = () => {
-  const { posts, isSinglePostLoading, isSinglePostError } = useGetPosts();
-  const { createNewPostMutation } = useCreateNewPostMutation();
-
-  if (isSinglePostLoading) {
-    return <div>로딩중</div>;
-  }
-
-  if (isSinglePostError) {
-    return <div>에러</div>;
-  }
-
-  const handleTestUseMutation = () => {
-    const newPost = {
-      title: "Test Title",
-      body: "Test Body",
-      userId: 1,
-    };
-
-    createNewPostMutation(newPost);
-  };
-
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <header className="text-center mb-12">
@@ -33,7 +10,6 @@ const MainPage = () => {
         </p>
       </header>
       <section className="flex justify-center gap-6">
-        <button onClick={handleTestUseMutation}>useMutation 테스트용</button>
         <Link
           to="/login"
           className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
