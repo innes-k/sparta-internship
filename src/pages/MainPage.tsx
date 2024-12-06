@@ -17,6 +17,12 @@ const MainPage = () => {
           로그인
         </Link>
         <Link
+          to="/"
+          className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
+        >
+          로그아웃 (임시)
+        </Link>
+        <Link
           to="/signup"
           className="px-6 py-3 text-lg bg-white text-purple-500 rounded-lg shadow-lg hover:bg-purple-100 hover:shadow-xl transition duration-300"
         >

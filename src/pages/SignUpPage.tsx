@@ -2,16 +2,16 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const SignupPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
-    username: "",
+    userId: "",
     nickname: "",
     password: "",
     confirmPassword: "",
   });
 
-  const navigate = useNavigate();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
@@ -34,19 +34,19 @@ const SignupPage: React.FC = () => {
 
   return (
     <main className="flex items-center justify-center min-h-screen">
-      <section className="border border-white p-8 w-full max-w-md">
+      <section className="border border-white rounded-md p-8 w-full max-w-md">
         <h1 className="text-2xl font-bold mb-6 text-center">회원가입</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium">
+            <label htmlFor="userId" className="block text-sm font-medium">
               아이디
             </label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
-              onChange={handleChange}
+              id="userId"
+              name="userId"
+              value={formData.userId}
+              onChange={handleChangeFormData}
               placeholder="아이디를 입력하세요"
               required
               className="mt-1 block w-full rounded-md shadow-sm text-black"
@@ -61,7 +61,7 @@ const SignupPage: React.FC = () => {
               id="nickname"
               name="nickname"
               value={formData.nickname}
-              onChange={handleChange}
+              onChange={handleChangeFormData}
               placeholder="닉네임을 입력하세요"
               required
               className="mt-1 block w-full  rounded-md shadow-sm  text-black"
@@ -76,7 +76,7 @@ const SignupPage: React.FC = () => {
               id="password"
               name="password"
               value={formData.password}
-              onChange={handleChange}
+              onChange={handleChangeFormData}
               placeholder="비밀번호를 입력하세요"
               required
               className="mt-1 block w-full  rounded-md shadow-sm  text-black"
@@ -91,7 +91,7 @@ const SignupPage: React.FC = () => {
               id="confirmPassword"
               name="confirmPassword"
               value={formData.confirmPassword}
-              onChange={handleChange}
+              onChange={handleChangeFormData}
               placeholder="비밀번호를 다시 입력하세요"
               required
               className="mt-1 block w-full  rounded-md shadow-sm  text-black"
