@@ -3,7 +3,7 @@ import { useAuthStore } from "../store/authStore";
 
 const MainPage = () => {
   const navigate = useNavigate();
-  const { logout } = useAuthStore();
+  const { isLoggedIn, logout } = useAuthStore();
 
   const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
@@ -27,30 +27,38 @@ const MainPage = () => {
         </p>
       </header>
       <section className="flex justify-center gap-6">
-        <Link
-          to="/login"
-          className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
-        >
-          로그인
-        </Link>
-        <div
-          className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
-          onClick={handleLogout}
-        >
-          로그아웃 (임시)
-        </div>
-        <Link
-          to="/signup"
-          className="px-6 py-3 text-lg bg-white text-purple-500 rounded-lg shadow-lg hover:bg-purple-100 hover:shadow-xl transition duration-300"
-        >
-          회원가입
-        </Link>
-        <Link
-          to="/mypage"
-          className="px-6 py-3 text-lg bg-white text-gray-800 rounded-lg shadow-lg hover:bg-gray-200 hover:shadow-xl transition duration-300"
-        >
-          마이페이지
-        </Link>
+        {isLoggedIn ? (
+          <>
+            <div
+              className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
+              onClick={handleLogout}
+            >
+              로그아웃
+            </div>
+            <Link
+              to="/mypage"
+              className="px-6 py-3 text-lg bg-white text-gray-800 rounded-lg shadow-lg hover:bg-gray-200 hover:shadow-xl transition duration-300"
+            >
+              마이페이지
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
+            >
+              로그인
+            </Link>
+
+            <Link
+              to="/signup"
+              className="px-6 py-3 text-lg bg-white text-purple-500 rounded-lg shadow-lg hover:bg-purple-100 hover:shadow-xl transition duration-300"
+            >
+              회원가입
+            </Link>
+          </>
+        )}
       </section>
     </div>
   );
