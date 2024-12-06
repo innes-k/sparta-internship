@@ -4,6 +4,5 @@
 
 body {
   @apply bg-gradient-to-r from-blue-500 to-purple-500 text-white;
-  /* background-color: #1e1f21; */
   color: white;
 }
