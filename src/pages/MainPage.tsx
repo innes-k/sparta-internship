@@ -1,6 +1,24 @@
+import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
+import { testGetSinglePost } from "../apis/test";
 
 const MainPage = () => {
+  const {
+    data: singlePost,
+    isLoading,
+    isError,
+  } = useQuery({ queryKey: ["singlePost"], queryFn: testGetSinglePost });
+
+  if (isLoading) {
+    return <div>로딩중</div>;
+  }
+
+  if (isError) {
+    return <div>에러</div>;
+  }
+
+  console.log("singlePost", singlePost);
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <header className="text-center mb-12">
