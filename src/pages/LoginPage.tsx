@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { useLoginMutation } from "../queries/hooks/useMutations/login/useMutations";
+import { useAuthStore } from "../store/authStore";
 
 const LoginPage: React.FC = () => {
   const { loginMutation } = useLoginMutation();
+  const { login } = useAuthStore();
 
   const [formData, setFormData] = useState({
     userId: "",
@@ -26,6 +28,8 @@ const LoginPage: React.FC = () => {
     };
 
     loginMutation(usePayload);
+    login();
+
     // console.log("Submitted Data:", formData);
   };
 
