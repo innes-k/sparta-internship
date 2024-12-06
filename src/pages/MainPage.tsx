@@ -1,7 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthStore } from "../store/authStore";
 
 const MainPage = () => {
   const navigate = useNavigate();
+  const { logout } = useAuthStore();
 
   const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     e.preventDefault();
@@ -10,6 +12,7 @@ const MainPage = () => {
     if (confirmLogout) {
       localStorage.removeItem("accessToken");
       alert("로그아웃 되었습니다.");
+      logout();
 
       navigate("/");
     }
