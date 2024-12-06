@@ -1,16 +1,19 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../../../apis/loginApi";
+import { loginApi } from "../../../../apis/loginApi";
+import { useAuthStore } from "../../../../store/authStore";
 
 import type { LoginRequest } from "../../../../types/loginTypes";
 
 export const useLoginMutation = () => {
   const navigate = useNavigate();
+  const { login } = useAuthStore();
 
   const { mutate: loginMutation } = useMutation({
-    mutationFn: (data: LoginRequest) => login(data),
+    mutationFn: (data: LoginRequest) => loginApi(data),
     onSuccess: (loginData) => {
       localStorage.setItem("accessToken", loginData.accessToken);
+      login();
       alert("로그인이 완료되었습니다!");
       navigate("/");
     },
