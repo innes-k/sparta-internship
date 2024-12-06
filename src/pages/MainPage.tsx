@@ -1,27 +1,10 @@
 import { Link } from "react-router-dom";
 import { useGetPosts } from "../queries/hooks/useQueries";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { testCreateSinglePost } from "../apis/test";
-import { QUERY_KEY_POSTS } from "../queries/queryKeys/queryKeys";
+import { useCreateNewPostMutation } from "../queries/hooks/useMutations";
 
 const MainPage = () => {
-  const queryClient = useQueryClient();
-
   const { posts, isSinglePostLoading, isSinglePostError } = useGetPosts();
-
-  const { mutate: createNewPostMutation } = useMutation({
-    mutationFn: (newPost: { title: string; body: string; userId: number }) =>
-      testCreateSinglePost(newPost),
-    onSuccess: (data) => {
-      console.log("onSuccess called with:", data);
-      queryClient.invalidateQueries({
-        queryKey: [QUERY_KEY_POSTS],
-      });
-    },
-    onError: (error) => {
-      console.error("Mutation failed:", error);
-    },
-  });
+  const { createNewPostMutation } = useCreateNewPostMutation();
 
   if (isSinglePostLoading) {
     return <div>로딩중</div>;
