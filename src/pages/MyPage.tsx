@@ -1,5 +1,103 @@
-const MyPage = () => {
-  return <div>MyPage</div>;
+import { useState } from "react";
+
+const MyPage: React.FC = () => {
+  const [profileImage, setProfileImage] = useState<string>("https://via.placeholder.com/150");
+  const [nickname, setNickname] = useState<string>("닉네임"); // 임시 닉네임
+  const [originalNickname, setOriginalNickname] = useState<string>("닉네임"); // 원본 닉네임 저장
+  const [isEditing, setIsEditing] = useState<boolean>(false); // 수정 상태 여부
+  const userId = "user1234"; // 임시 아이디
+
+  // 프로필 이미지 변경 핸들러
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      const file = e.target.files[0];
+      const imageUrl = URL.createObjectURL(file);
+      setProfileImage(imageUrl);
+    }
+  };
+
+  // 닉네임 변경 핸들러
+  const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNickname(e.target.value);
+  };
+
+  const handleButtonClick = () => {
+    if (isEditing) {
+      // 저장하기 로직
+      if (nickname === originalNickname) {
+        alert("변경된 값이 없습니다.");
+        return;
+      }
+      setOriginalNickname(nickname); // 변경된 닉네임 저장
+      alert("프로필이 저장되었습니다!");
+      console.log("Updated Profile:", { profileImage, nickname });
+    }
+    setIsEditing(!isEditing); // 수정 상태 토글
+  };
+
+  return (
+    <main className="flex items-center justify-center min-h-screen">
+      <section className="border border-white p-8 w-full max-w-md rounded-md shadow-lg">
+        <h1 className="text-2xl font-bold mb-6 text-center">마이페이지</h1>
+
+        {/* 프로필 이미지 */}
+        <div className="flex flex-col items-center mb-6">
+          <img
+            src={profileImage}
+            alt="프로필 이미지"
+            className="w-32 h-32 rounded-full object-cover mb-4 border border-gray-300"
+          />
+          <label
+            htmlFor="profileImage"
+            className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            프로필 이미지 변경
+          </label>
+          <input
+            type="file"
+            id="profileImage"
+            accept="image/*"
+            onChange={handleImageChange}
+            className="hidden"
+          />
+        </div>
+
+        {/* 아이디 */}
+        <div className="mb-4">
+          <label className="text-sm font-medium mb-1">아이디</label>
+          <input
+            type="text"
+            value={userId}
+            readOnly
+            className="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-500 cursor-not-allowed"
+          />
+        </div>
+
+        {/* 닉네임 */}
+        <div className="mb-6">
+          <label className="text-sm font-medium mb-1">닉네임</label>
+          <input
+            type="text"
+            value={nickname}
+            onChange={handleNicknameChange}
+            readOnly={!isEditing}
+            placeholder="닉네임을 입력하세요"
+            className={`mt-1 block w-full border rounded-md p-2 ${
+              isEditing ? "border-blue-500 text-black" : "border-gray-300 text-gray-500 bg-gray-100"
+            }`}
+          />
+        </div>
+
+        {/* 버튼 */}
+        <button
+          onClick={handleButtonClick}
+          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        >
+          {isEditing ? "저장하기" : "닉네임 변경하기"}
+        </button>
+      </section>
+    </main>
+  );
 };
 
 export default MyPage;
