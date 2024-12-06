@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "react-router-dom";
 import { testGetSinglePost } from "../apis/test";
+import { QUERY_KEY_SINGLE_POST } from "../queries/queryKeys/queryKeys";
 
 const MainPage = () => {
   const {
     data: singlePost,
     isLoading,
     isError,
-  } = useQuery({ queryKey: ["singlePost"], queryFn: testGetSinglePost });
+  } = useQuery({ queryKey: [QUERY_KEY_SINGLE_POST], queryFn: testGetSinglePost });
 
   if (isLoading) {
     return <div>로딩중</div>;
