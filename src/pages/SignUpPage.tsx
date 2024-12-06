@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSignUpMutation } from "../queries/hooks/useMutations";
+import { useSignUpMutation } from "../queries/hooks/useMutations/signUp/useMutations";
 
 const SignupPage: React.FC = () => {
   // 테스트 id, pw : christmasTest

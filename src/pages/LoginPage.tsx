@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../queries/hooks/useMutations/login/useMutations";
 
 const LoginPage: React.FC = () => {
+  const { loginMutation } = useLoginMutation();
+
   const [formData, setFormData] = useState({
-    username: "",
+    userId: "",
     password: "",
   });
-
-  const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -20,10 +20,13 @@ const LoginPage: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    alert("로그인이 완료되었습니다!");
-    console.log("Submitted Data:", formData);
+    const usePayload = {
+      id: formData.userId,
+      password: formData.password,
+    };
 
-    navigate("/");
+    loginMutation(usePayload);
+    // console.log("Submitted Data:", formData);
   };
 
   return (
@@ -32,14 +35,14 @@ const LoginPage: React.FC = () => {
         <h1 className="text-2xl font-bold mb-6 text-center">로그인</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label htmlFor="username" className="block text-sm font-medium">
+            <label htmlFor="userId" className="block text-sm font-medium">
               아이디
             </label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={formData.username}
+              id="userId"
+              name="userId"
+              value={formData.userId}
               onChange={handleChange}
               placeholder="아이디를 입력하세요"
               required
