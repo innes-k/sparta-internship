@@ -16,3 +16,8 @@ export interface TextInputProps {
   required?: boolean;
   className?: string;
 }
+
+export interface ContentBoxProps {
+  title: string;
+  children: React.ReactNode;
+}
