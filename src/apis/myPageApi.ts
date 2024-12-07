@@ -8,6 +8,18 @@ export const getUserInfo = async () => {
 };
 
 export const updateUserInfo = async (newUserInfo: UpdateUserInfoRequest) => {
-  const response = await api.patch("/profile", newUserInfo);
+  const formData = new FormData();
+
+  console.log("newUserInfo.avatar", newUserInfo.avatar);
+
+  formData.append("avatar", newUserInfo.avatar);
+  formData.append("nickname", newUserInfo.nickname);
+
+  const response = await api.patch("/profile", formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
   return response;
 };

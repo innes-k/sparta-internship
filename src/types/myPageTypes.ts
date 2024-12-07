@@ -1,4 +1,4 @@
 export interface UpdateUserInfoRequest {
-  avatar: string;
+  avatar: File;
   nickname: string;
 }

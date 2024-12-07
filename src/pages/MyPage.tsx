@@ -4,6 +4,7 @@ import { useUpdateUserInfoMutation } from "../queries/hooks/useMutations/mypage/
 
 const MyPage: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string>("");
+  const [newFile, setNewFile] = useState<File>();
   const [nickname, setNickname] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false); // 수정 상태 여부
 
@@ -32,7 +33,9 @@ const MyPage: React.FC = () => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
+
       setProfileImage(imageUrl);
+      setNewFile(file);
     }
   };
 
@@ -48,7 +51,8 @@ const MyPage: React.FC = () => {
         alert("변경된 값이 없습니다.");
         return;
       } else {
-        updateUserInfoMutation({ avatar: profileImage, nickname });
+        console.log("newFile", newFile);
+        updateUserInfoMutation({ avatar: newFile!, nickname });
       }
     }
     setIsEditing(!isEditing);
