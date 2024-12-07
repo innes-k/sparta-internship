@@ -1,50 +1,51 @@
-# React + TypeScript + Vite
+# Frontend React 과제
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**스파르타 한 달 인턴 선발 - 개인 과제**
 
-Currently, two official plugins are available:
+## 📋 프로젝트 개요
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 이 프로젝트는 스파르타 코딩 클럽 인턴십 과제로 개발된 **React** 및 **TypeScript** 기반의 프론트엔드 프로젝트입니다.
 
-## Expanding the ESLint configuration
+- JWT를 활용한 인증/인가를 통해 사용자 정보를 안전하게 관리하며, 주요 페이지는 회원가입, 로그인, 그리고 마이페이지로 구성되어 있습니다.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🔑 주요 기능
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 1. **회원가입 페이지**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- 사용자의 아이디, 닉네임, 비밀번호를 입력받아 새로운 계정을 생성합니다.
+- 필수 입력 항목을 검증하여 유효하지 않은 데이터 전송을 방지합니다.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+### 2. **로그인 페이지**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+- 등록된 사용자가 JWT 인증을 통해 로그인을 수행할 수 있습니다.
+- 로그인 후 인증 토큰이 저장되며, 이를 통해 사용자 인증 상태를 유지합니다.
+- zustand로 로그인 상태를 전역에서 관리합니다.
+
+### 3. **마이페이지**
+
+- **프로필 이미지 변경**  
+  사용자는 개인화된 프로필 이미지를 업로드 및 변경할 수 있습니다.
+- **닉네임 변경**  
+  닉네임을 자유롭게 수정할 수 있는 기능을 제공합니다.
+
+---
+
+## 🛠️ 기술 스택
+
+- **React**: 사용자 인터페이스를 구축하기 위한 프레임워크.
+- **TypeScript**: 타입 안정성을 높여 코드 품질 향상.
+- **JWT (JSON Web Token)**: 인증 및 인가 처리.
+- **TanStack Query**: 서버 상태 관리 및 비동기 데이터 처리.
+- **Zustand**: 간단하고 직관적인 상태 관리 라이브러리.
+
+---
+
+## 🚀 설치 및 실행 방법
+
+1. **레포지토리 클론**
+   ```bash
+   git clone <레포지토리 URL>
+   cd <프로젝트 디렉토리>
+   ```
