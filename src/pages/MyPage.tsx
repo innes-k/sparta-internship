@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { useGetUserInfo } from "../queries/hooks/useQueries/useQueries";
+import { useUpdateUserInfoMutation } from "../queries/hooks/useMutations/mypage/useMutations";
 
 const MyPage: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string>("");
+  const [newFile, setNewFile] = useState<File>();
   const [nickname, setNickname] = useState<string>("");
   const [isEditing, setIsEditing] = useState<boolean>(false); // 수정 상태 여부
 
   const { userInfo, isUserInfoLoading, isUserInfoError } = useGetUserInfo();
+  const { updateUserInfoMutation } = useUpdateUserInfoMutation();
 
   useEffect(() => {
     if (userInfo) {
-      const defaultAvatar = "https://via.placeholder.com/150";
-      setProfileImage(userInfo.avatar || defaultAvatar);
+      setProfileImage(userInfo.avatar);
       setNickname(userInfo.nickname);
     }
   }, [userInfo]);
@@ -24,16 +26,16 @@ const MyPage: React.FC = () => {
     return <div>Error</div>;
   }
 
-  console.log("userInfo", userInfo);
-
-  const { id: userId, nickname: originalNickname } = userInfo;
+  const { id: userId, nickname: originalNickname, avatar: originalAvatar } = userInfo;
 
   // 프로필 이미지 변경 핸들러
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       const file = e.target.files[0];
       const imageUrl = URL.createObjectURL(file);
+
       setProfileImage(imageUrl);
+      setNewFile(file);
     }
   };
 
@@ -42,17 +44,18 @@ const MyPage: React.FC = () => {
     setNickname(e.target.value);
   };
 
+  // 수정하기/저장하기 버튼 핸들러
   const handleButtonClick = () => {
     if (isEditing) {
-      // 저장하기 로직
-      if (nickname === originalNickname) {
+      if (nickname === originalNickname && profileImage === originalAvatar) {
         alert("변경된 값이 없습니다.");
         return;
+      } else {
+        console.log("newFile", newFile);
+        updateUserInfoMutation({ avatar: newFile!, nickname });
       }
-      alert("프로필이 저장되었습니다!");
-      console.log("Updated Profile:", { profileImage, nickname });
     }
-    setIsEditing(!isEditing); // 수정 상태 토글
+    setIsEditing(!isEditing);
   };
 
   return (
@@ -63,16 +66,19 @@ const MyPage: React.FC = () => {
         {/* 프로필 이미지 */}
         <div className="flex flex-col items-center mb-6">
           <img
-            src={profileImage}
+            src={profileImage === null ? "https://via.placeholder.com/150" : profileImage}
             alt="프로필 이미지"
             className="w-32 h-32 rounded-full object-cover mb-4 border border-gray-300"
           />
-          <label
-            htmlFor="profileImage"
-            className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-          >
-            프로필 이미지 변경
-          </label>
+          {isEditing && (
+            <label
+              htmlFor="profileImage"
+              className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+            >
+              프로필 이미지 변경
+            </label>
+          )}
+
           <input
             type="file"
             id="profileImage"
@@ -103,7 +109,9 @@ const MyPage: React.FC = () => {
             readOnly={!isEditing}
             placeholder="닉네임을 입력하세요"
             className={`mt-1 block w-full border rounded-md p-2 ${
-              isEditing ? "border-blue-500 text-black" : "border-gray-300 text-gray-500 bg-gray-100"
+              isEditing
+                ? "border-blue-500 text-black"
+                : "border-gray-300 text-gray-500 bg-gray-100 cursor-not-allowed"
             }`}
           />
         </div>
@@ -113,7 +121,7 @@ const MyPage: React.FC = () => {
           onClick={handleButtonClick}
           className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
-          {isEditing ? "저장하기" : "닉네임 변경하기"}
+          {isEditing ? "저장하기" : "내 정보 수정하기"}
         </button>
       </section>
     </main>
