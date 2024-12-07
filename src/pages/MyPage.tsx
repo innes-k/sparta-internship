@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useGetUserInfo } from "../hooks/mypage/useQueries";
 import { useUpdateUserInfoMutation } from "../hooks/mypage/useMutations";
+import TextInput from "../common/TextInput";
 
 const MyPage: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string>("");
@@ -89,32 +90,34 @@ const MyPage: React.FC = () => {
         </div>
 
         {/* 아이디 */}
-        <div className="mb-4">
-          <label className="text-sm font-medium mb-1">아이디</label>
-          <input
-            type="text"
-            value={userId}
-            readOnly
-            className="mt-1 block w-full border border-gray-300 rounded-md p-2 bg-gray-100 text-gray-500 cursor-not-allowed"
-          />
-        </div>
+        <TextInput
+          id="userId"
+          label="아이디"
+          name="userId"
+          value={userId}
+          onChange={() => {}}
+          type="text"
+          className="border-gray-300 bg-gray-100 text-gray-500 cursor-not-allowed"
+          placeholder=""
+          required={false}
+        />
 
         {/* 닉네임 */}
-        <div className="mb-6">
-          <label className="text-sm font-medium mb-1">닉네임</label>
-          <input
-            type="text"
-            value={nickname}
-            onChange={handleNicknameChange}
-            readOnly={!isEditing}
-            placeholder="닉네임을 입력하세요"
-            className={`mt-1 block w-full border rounded-md p-2 ${
-              isEditing
-                ? "border-blue-500 text-black"
-                : "border-gray-300 text-gray-500 bg-gray-100 cursor-not-allowed"
-            }`}
-          />
-        </div>
+        <TextInput
+          id="nickname"
+          label="닉네임"
+          name="nickname"
+          value={nickname}
+          onChange={handleNicknameChange}
+          type="text"
+          placeholder="닉네임을 입력하세요"
+          className={`${
+            isEditing
+              ? "border-blue-500 text-black"
+              : "border-gray-300 text-gray-500 bg-gray-100 cursor-not-allowed"
+          }`}
+          required
+        />
 
         {/* 버튼 */}
         <button
