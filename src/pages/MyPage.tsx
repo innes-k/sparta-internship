@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useGetUserInfo } from "../queries/hooks/useQueries/useQueries";
-import { useUpdateUserInfoMutation } from "../queries/hooks/useMutations/mypage/useMutations";
+import { useGetUserInfo } from "../hooks/mypage/useQueries";
+import { useUpdateUserInfoMutation } from "../hooks/mypage/useMutations";
 
 const MyPage: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string>("");

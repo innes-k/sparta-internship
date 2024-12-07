@@ -1,26 +1,18 @@
-import { useState } from "react";
-import { useSignUpMutation } from "../queries/hooks/useMutations/signUp/useMutations";
-import TextInput from "../commons/TextInput";
+import TextInput from "../common/TextInput";
+import { useFormData } from "../hooks/common/useFormData";
+import { useSignUpMutation } from "../hooks/signUp/useMutations";
 
 const SignupPage: React.FC = () => {
   // 테스트 id, pw : christmasTest
 
   const { signUpMutation } = useSignUpMutation();
 
-  const [formData, setFormData] = useState({
+  const { formData, handleChangeFormData } = useFormData({
     userId: "",
     nickname: "",
     password: "",
     confirmPassword: "",
   });
-
-  const handleChangeFormData = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value.trim(),
-    }));
-  };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

@@ -1,5 +1,5 @@
 import { useAuthStore } from "../store/authStore";
-import ButtonLink from "../commons/MainPageButton";
+import ButtonLink from "../common/MainPageButton";
 
 const MainPage = () => {
   const { isLoggedIn, logout } = useAuthStore();

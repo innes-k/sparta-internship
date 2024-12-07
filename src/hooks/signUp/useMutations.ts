@@ -1,8 +1,8 @@
 import { useMutation } from "@tanstack/react-query";
-import { signUp } from "../../../../apis/signUpApi";
 import { useNavigate } from "react-router-dom";
+import { signUp } from "../../apis/signUpApi";
 
-import type { SignUpRequest } from "../../../../types/signUpTypes";
+import type { SignUpRequest } from "../../types/signUpTypes";
 
 export const useSignUpMutation = () => {
   const navigate = useNavigate();

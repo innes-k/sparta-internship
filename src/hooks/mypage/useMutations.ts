@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateUserInfo } from "../../../../apis/myPageApi";
-import { QUERY_KEY_USER_INFO } from "../../../queryKeys/queryKeys";
+import { updateUserInfo } from "../../apis/myPageApi";
+import { QUERY_KEY_USER_INFO } from "../../queryKeys/queryKeys";
 
-import type { UpdateUserInfoRequest } from "../../../../types/myPageTypes";
+import type { UpdateUserInfoRequest } from "../../types/myPageTypes";
 
 export const useUpdateUserInfoMutation = () => {
   const queryClient = useQueryClient();
