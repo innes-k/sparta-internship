@@ -1,11 +1,10 @@
-import { Link, useNavigate } from "react-router-dom";
 import { useAuthStore } from "../store/authStore";
+import ButtonLink from "../commons/MainPageButton";
 
 const MainPage = () => {
-  const navigate = useNavigate();
   const { isLoggedIn, logout } = useAuthStore();
 
-  const handleLogout = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+  const handleLogout = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     e.preventDefault();
 
     const confirmLogout = window.confirm("로그아웃 하시겠습니까?");
@@ -13,8 +12,6 @@ const MainPage = () => {
       localStorage.removeItem("accessToken");
       alert("로그아웃 되었습니다.");
       logout();
-
-      navigate("/");
     }
   };
 
@@ -29,34 +26,21 @@ const MainPage = () => {
       <section className="flex justify-center gap-6">
         {isLoggedIn ? (
           <>
-            <div
-              className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
-              onClick={handleLogout}
-            >
+            <ButtonLink to="/" onClick={handleLogout} className="text-blue-500 hover:bg-blue-100">
               로그아웃
-            </div>
-            <Link
-              to="/mypage"
-              className="px-6 py-3 text-lg bg-white text-gray-800 rounded-lg shadow-lg hover:bg-gray-200 hover:shadow-xl transition duration-300"
-            >
+            </ButtonLink>
+            <ButtonLink to="/mypage" className="text-gray-800 hover:bg-gray-200">
               마이페이지
-            </Link>
+            </ButtonLink>
           </>
         ) : (
           <>
-            <Link
-              to="/login"
-              className="px-6 py-3 text-lg bg-white text-blue-500 rounded-lg shadow-lg hover:bg-blue-100 hover:shadow-xl transition duration-300"
-            >
+            <ButtonLink to="/login" className="text-blue-500 hover:bg-blue-100">
               로그인
-            </Link>
-
-            <Link
-              to="/signup"
-              className="px-6 py-3 text-lg bg-white text-purple-500 rounded-lg shadow-lg hover:bg-purple-100 hover:shadow-xl transition duration-300"
-            >
+            </ButtonLink>
+            <ButtonLink to="/signup" className="text-purple-500 hover:bg-purple-100">
               회원가입
-            </Link>
+            </ButtonLink>
           </>
         )}
       </section>
