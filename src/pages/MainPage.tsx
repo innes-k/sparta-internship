@@ -18,10 +18,8 @@ const MainPage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <header className="text-center mb-12">
-        <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">Sparta Internship Task</h1>
-        <p className="text-xl font-light drop-shadow-sm">
-          간단한 회원가입, 로그인, 마이페이지 구현
-        </p>
+        <h1 className="text-5xl font-extrabold mb-4 drop-shadow-lg">Frontend React 과제</h1>
+        <p className="text-xl drop-shadow-sm">회원가입, 로그인, 마이페이지 구현</p>
       </header>
       <section className="flex justify-center gap-6">
         {isLoggedIn ? (
