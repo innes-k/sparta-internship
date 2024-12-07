@@ -3,8 +3,9 @@ import { useGetUserInfo } from "../hooks/mypage/useQueries";
 import { useUpdateUserInfoMutation } from "../hooks/mypage/useMutations";
 import TextInput from "../common/TextInput";
 import SubmitButton from "../common/SubmitButton";
+import MypageProfileImg from "./MypageProfileImg";
 
-const MypageContent = () => {
+const MypageContent: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string>("");
   const [newFile, setNewFile] = useState<File>();
   const [nickname, setNickname] = useState<string>("");
@@ -30,17 +31,6 @@ const MypageContent = () => {
 
   const { id: userId, nickname: originalNickname, avatar: originalAvatar } = userInfo;
 
-  // 프로필 이미지 변경 핸들러
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      const imageUrl = URL.createObjectURL(file);
-
-      setProfileImage(imageUrl);
-      setNewFile(file);
-    }
-  };
-
   // 닉네임 변경 핸들러
   const handleNicknameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setNickname(e.target.value);
@@ -62,30 +52,12 @@ const MypageContent = () => {
 
   return (
     <>
-      {/* 프로필 이미지 */}
-      <div className="flex flex-col items-center mb-6">
-        <img
-          src={profileImage === null ? "https://via.placeholder.com/150" : profileImage}
-          alt="프로필 이미지"
-          className="w-32 h-32 rounded-full object-cover mb-4 border border-gray-300"
-        />
-        {isEditing && (
-          <label
-            htmlFor="profileImage"
-            className="cursor-pointer bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-          >
-            프로필 이미지 변경
-          </label>
-        )}
-
-        <input
-          type="file"
-          id="profileImage"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="hidden"
-        />
-      </div>
+      <MypageProfileImg
+        profileImage={profileImage}
+        setProfileImage={setProfileImage}
+        setNewFile={setNewFile}
+        isEditing={isEditing}
+      />
 
       {/* 아이디 */}
       <TextInput

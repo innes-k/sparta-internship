@@ -3,7 +3,7 @@ import { useLoginMutation } from "../hooks/login/useMutations";
 import SubmitButton from "../common/SubmitButton";
 import TextInput from "../common/TextInput";
 
-const LoginContent = () => {
+const LoginContent: React.FC = () => {
   const { loginMutation } = useLoginMutation();
 
   const { formData, handleChangeFormData } = useFormData({

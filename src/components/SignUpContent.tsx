@@ -3,7 +3,7 @@ import { useSignUpMutation } from "../hooks/signUp/useMutations";
 import SubmitButton from "../common/SubmitButton";
 import TextInput from "../common/TextInput";
 
-const SignUpContent = () => {
+const SignUpContent: React.FC = () => {
   const { signUpMutation } = useSignUpMutation();
 
   const { formData, handleChangeFormData } = useFormData({
