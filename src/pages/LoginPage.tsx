@@ -1,6 +1,7 @@
-import TextInput from "../common/TextInput";
 import { useFormData } from "../hooks/common/useFormData";
 import { useLoginMutation } from "../hooks/login/useMutations";
+import SubmitButton from "../common/SubmitButton";
+import TextInput from "../common/TextInput";
 
 const LoginPage: React.FC = () => {
   const { loginMutation } = useLoginMutation();
@@ -45,12 +46,7 @@ const LoginPage: React.FC = () => {
             placeholder="비밀번호를 입력하세요"
             required
           />
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            로그인하기
-          </button>
+          <SubmitButton type="submit">로그인하기</SubmitButton>
         </form>
       </section>
     </main>

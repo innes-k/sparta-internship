@@ -1,6 +1,7 @@
-import TextInput from "../common/TextInput";
 import { useFormData } from "../hooks/common/useFormData";
 import { useSignUpMutation } from "../hooks/signUp/useMutations";
+import SubmitButton from "../common/SubmitButton";
+import TextInput from "../common/TextInput";
 
 const SignupPage: React.FC = () => {
   // 테스트 id, pw : christmasTest
@@ -74,12 +75,7 @@ const SignupPage: React.FC = () => {
             required
             type="password"
           />
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-          >
-            회원가입하기
-          </button>
+          <SubmitButton type="submit">회원가입하기</SubmitButton>
         </form>
       </section>
     </main>

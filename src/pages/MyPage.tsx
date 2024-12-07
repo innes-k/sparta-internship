@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetUserInfo } from "../hooks/mypage/useQueries";
 import { useUpdateUserInfoMutation } from "../hooks/mypage/useMutations";
 import TextInput from "../common/TextInput";
+import SubmitButton from "../common/SubmitButton";
 
 const MyPage: React.FC = () => {
   const [profileImage, setProfileImage] = useState<string>("");
@@ -120,12 +121,9 @@ const MyPage: React.FC = () => {
         />
 
         {/* 버튼 */}
-        <button
-          onClick={handleButtonClick}
-          className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-        >
+        <SubmitButton type="button" onClick={handleButtonClick}>
           {isEditing ? "저장하기" : "내 정보 수정하기"}
-        </button>
+        </SubmitButton>
       </section>
     </main>
   );
