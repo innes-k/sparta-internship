@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { QUERY_KEY_USER_INFO } from "../../queryKeys/queryKeys";
-import { getUserInfo } from "../../../apis/myPageApi";
+import { getUserInfo } from "../../apis/myPageApi";
 
 export const useGetUserInfo = () => {
   const {
